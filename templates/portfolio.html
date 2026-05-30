@@ -34,9 +34,9 @@
     <!-- Core Style Css -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 <style>
-    .slide {
+  .slide {
   position: absolute;
-  inset: 0;               /* fills the header */
+  inset: 0;
   background-size: cover;
   background-position: center;
   opacity: 0;
@@ -46,58 +46,120 @@
 .slide.active {
   opacity: 1;
 }
+
+/* ── portfolio section ── */
 .portfolio-section {
   background: #111;
-  padding: 60px 0;
+  padding: 70px 0;
 }
 
+/* section title — optional, add above your grid */
+.portfolio-section .section-head {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.portfolio-section .section-head h2 {
+  font-size: 28px;
+  color: #f0f0f0;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.portfolio-section .section-head p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.1em;
+}
+
+/* ── grid ── */
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
+/* ── card ── */
+.portfolio-card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: #181818;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255,255,255,0.12);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+
+.portfolio-card:active {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.12),
+              0 0 24px rgba(255,255,255,0.06);
+}
+
+/* ── image ── */
 .portfolio-card img {
   width: 100%;
-  height: 250px;
+  height: 220px;
   object-fit: cover;
   display: block;
-  border-radius: 30px 30px 0px 0px;
+  transition: transform 0.5s ease;
 }
 
+.portfolio-card:hover img {
+  transform: scale(1.06);
+}
+
+/* ── info box ── */
 .portfolio-card .info {
-  padding: 16px;
-  background: #1a1a1a;
-  border-radius: 0px 0px 30px 30px;
+  padding: 16px 18px 20px;
+  border-top: 1px solid rgba(255,255,255,0.05);
 }
 
+/* category */
 .portfolio-card .info h6 {
-  font-size: 11px;
-  letter-spacing: 0.2em;
+  font-size: 10px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.28);
   margin-bottom: 6px;
 }
 
+/* title */
 .portfolio-card .info h5 {
-  font-size: 16px;
-  color: #fff;
-  margin-bottom: 8px;
+  font-size: 15px;
+  color: #ececec;
+  font-weight: 500;
+  margin-bottom: 14px;
+  line-height: 1.4;
 }
 
+/* link */
 .portfolio-card .info a {
-  font-size: 12px;
-  color: rgba(255,255,255,0.4);
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
   text-decoration: none;
+  letter-spacing: 0.08em;
+  transition: color 0.2s;
 }
 
 .portfolio-card .info a:hover {
   color: #fff;
 }
 
-@media (max-width: 768px) {
-  .portfolio-grid { grid-template-columns: 1fr; }
+/* ── responsive ── */
+@media (max-width: 992px) {
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+@media (max-width: 576px) {
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .portfolio-section { padding: 50px 0; }
+}
+
 </style>
 </head>
 
@@ -139,46 +201,48 @@
         <!-- ==================== Start Header ==================== -->
 
         
-        <header class="page-header section-padding" style="position: relative; overflow: hidden; height: 631px;">
+        <header style="background: black; padding: 80px 0;">
+  <div class="container">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:40px;">
 
-        <!-- Slides -->
-         {% for banner in banner  %}
-        <div class="slide active" data-background="{{banner.image_one.url}}"></div>
-        {% endfor %}
-       
-
-        <!-- Dark overlay -->
-        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);z-index:1;"></div>
-
-        <!-- Content -->
-        <div style="position:relative; z-index:2; text-align:center; padding-top:100px; color:#fff;">
-  
-        <!-- small label above -->
-        <p style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:0.4em; 
-                    text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:12px;">
-            Our Work
+      <!-- Left: text -->
+      <div style="flex:1;">
+        <p style="font-size:13px; font-weight:600; color:#4f8ef7; 
+                  text-transform:uppercase; letter-spacing:0.15em; margin-bottom:10px;">
+          Our Works
         </p>
+        <div style="width:30px; height:2px; background:#4f8ef7; margin-bottom:20px;"></div>
 
-        <!-- main title -->
-        <h1 style="font-family:'Playfair Display',serif; font-size:58px; 
-                    font-weight:700; margin:0; letter-spacing:-1px;">
-            Portfolio
+        <h1 style="font-size:42px; font-weight:700; color:#fff; 
+                   line-height:1.2; margin-bottom:20px;">
+          Our Latest Projects
         </h1>
 
-        <!-- gold underline accent -->
-        <div style="width:50px; height:2px; background:#d4a96a; margin:16px auto;"></div>
+        <p style="font-size:14px; color:rgba(255,255,255,0.5); 
+                  line-height:1.8; max-width:480px;">
+          A well-established website development and digital marketing-based 
+          IT company providing best-in-class technology solutions worldwide.
+        </p>
 
         <!-- breadcrumb -->
-        <div style="font-family:'Jost',sans-serif; font-size:13px; 
-                    letter-spacing:0.08em; color:rgba(255,255,255,0.5);">
-            <a href="{% url 'portfolio' %}" style="color:rgba(255,255,255,0.6); text-decoration:none;">Home</a>
-            <span style="margin:0 12px; color:rgba(255,255,255,0.2);">—</span>
-            <span style="color:#d4a96a;">Portfolio</span>
+        <div style="margin-top:30px; font-size:13px; color:rgba(255,255,255,0.4);">
+          <a href="{% url 'portfolio' %}" style="color:rgba(255,255,255,0.5); text-decoration:none;">Home</a>
+          <span style="margin:0 10px;">—</span>
+          <span style="color:#4f8ef7;">Portfolio</span>
         </div>
+      </div>
 
-        </div>
+      <!-- Right: image -->
+      <div style="flex:1; text-align:right;">
+        {% for banner in banner %}
+        <img src="{{ banner.image_one.url }}" alt="Portfolio"
+             style="max-width:100%; max-height:350px; object-fit:contain;">
+        {% endfor %}
+      </div>
 
-        </header>
+    </div>
+  </div>
+</header>
 
         <!-- ==================== End Header ==================== -->
 
