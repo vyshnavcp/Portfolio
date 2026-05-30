@@ -4,6 +4,5 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
- path('',views.portfolio,name='portfolio'),
- path('portfolio_detail',views.portfolio_detail,name='portfolio_detail')
-]
+path('',views.portfolio,name='portfolio'),
+path('portfolio/<slug:slug>/', views.portfolio_detail, name='portfolio_detail'),]
